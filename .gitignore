@@ -1,5 +1,7 @@
 
+# Build files
 .gradle
+build
 
 # IntelliJ
 .idea
