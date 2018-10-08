@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: PiwigoClientWsExts
-Version: 1.0.2
+Version: 1.0.3
 Description: This plugin exposes more of the standard Piwigo website functionality for the PiwigoClient Android app (or others) to  make use of.
 Plugin URI: http://piwigo.org/ext/extension_view.php
 Author: Gareth Deli
@@ -24,9 +24,9 @@ global $prefixeTable;
 
 define('PWG_CLI_EXT_ID',      basename(dirname(__FILE__)));
 define('PWG_CLI_EXT_PATH' ,   PHPWG_PLUGINS_PATH . PWG_CLI_EXT_ID . '/');
-define('PWG_CLI_EXT_TABLE',   $prefixeTable . 'PiwigoClientWsExts');
+//define('PWG_CLI_EXT_TABLE',   $prefixeTable . 'PiwigoClientWsExts');
 define('PWG_CLI_EXT_ADMIN',   get_root_url() . 'admin.php?page=plugin-' . PWG_CLI_EXT_ID);
-define('PWG_CLI_EXT_PUBLIC',  get_absolute_root_url() . make_index_url(array('section' => 'PiwigoClientWsExts')) . '/');
+//define('PWG_CLI_EXT_PUBLIC',  get_absolute_root_url() . make_index_url(array('section' => 'PiwigoClientWsExts')) . '/');
 define('PWG_CLI_EXT_DIR',     PHPWG_ROOT_PATH . PWG_LOCAL_DIR . 'PiwigoClientWsExts/');
 
 
@@ -72,3 +72,5 @@ function PiwigoClientWsExts_init()
   load_language('plugin.lang', PWG_CLI_EXT_PATH);
 
 }
+
+?>
