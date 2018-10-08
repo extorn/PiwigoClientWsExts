@@ -35,3 +35,8 @@ Piwigo is released under the GPL v2 license so this plugin has also been release
 
 If you want to extend it, please submit a pull request to this github repo rather than just forking a new plugin though.
 If you don't know how to fork and submit PRs, please do a google search, it's a lot simpler than you may think!
+
+## How to build?
+
+Run the gradle file to build a zip file.
+This zip file must be unzipped into the plugins folder of your Piwigo server

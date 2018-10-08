@@ -1,11 +1,11 @@
 <?php
 /*
-Plugin Name: PiwigoClientWsExts
-Version: 1.0.3
+Plugin Name: @plugin_name@
+Version: @plugin_version@
 Description: This plugin exposes more of the standard Piwigo website functionality for the PiwigoClient Android app (or others) to  make use of.
-Plugin URI: http://piwigo.org/ext/extension_view.php
+Plugin URI: https://piwigo.org/ext/extension_view.php?eid=880
 Author: Gareth Deli
-Author URI: https://github.com/extorn/PiwigoClient-ServerExt
+Author URI: https://github.com/extorn/@plugin_name@
 */
 
 /**

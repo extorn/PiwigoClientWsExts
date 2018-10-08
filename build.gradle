@@ -1,0 +1,43 @@
+plugins {
+    id "base"
+}
+
+import org.apache.tools.ant.filters.ReplaceTokens
+
+version = '1.0.4'
+
+
+task delete(type: Delete) {
+    delete rootProject.buildDir
+}
+
+task updateVersion(type: Copy) {
+    from "src"
+    include "main.inc.php"
+    into rootProject.buildDir
+    filter(ReplaceTokens, tokens: [plugin_name: rootProject.name, plugin_version: rootProject.version])
+}
+
+task myzip(type: Zip, group: "Archive", description: "Archives sources in a zip file") {
+    from(".") {
+        into(rootProject.name)
+        include "README.md"
+        include "LICENCE"
+    }
+    from("src") {
+        include "*"
+        exclude "main.inc.php"
+        into(rootProject.name)
+    }
+    from(rootProject.buildDir) {
+        include "main.inc.php"
+        into(rootProject.name)
+    }
+
+
+    destinationDir file(rootProject.buildDir)
+    setArchiveName rootProject.name + "_" + rootProject.version + ".zip"
+}
+
+assemble.dependsOn updateVersion
+assemble.dependsOn myzip
