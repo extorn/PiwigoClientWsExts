@@ -4,7 +4,7 @@ defined('PWG_CLI_EXT_PATH') or die('Hacking attempt!');
 include_once(PHPWG_ROOT_PATH.'include/common.inc.php');
 include_once(PHPWG_ROOT_PATH.'include/ws_core.inc.php');
 
-function PiwigoClientServerExt_ws_add_methods($arr)
+function PiwigoClientWsExts_ws_add_methods($arr)
 {
   global $conf, $user;
   $service = &$arr[0];

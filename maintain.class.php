@@ -6,7 +6,7 @@ defined('PHPWG_ROOT_PATH') or die('Hacking attempt!');
  * It must extends PluginMaintain and be named "PLUGINID_maintain"
  * where PLUGINID is the directory name of your plugin.
  */
-class PiwigoClientServerExt_maintain extends PluginMaintain
+class PiwigoClientWsExts_maintain extends PluginMaintain
 {
 
   function __construct($plugin_id)
@@ -16,7 +16,7 @@ class PiwigoClientServerExt_maintain extends PluginMaintain
     global $prefixeTable;
 
     // Class members can't be declared with computed values so initialization is done here
-    $this->dir = PHPWG_ROOT_PATH . PWG_LOCAL_DIR . 'PiwigoClientServerExt/';
+    $this->dir = PHPWG_ROOT_PATH . PWG_LOCAL_DIR . 'PiwigoClientWsExts/';
   }
 
   /**

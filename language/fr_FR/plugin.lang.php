@@ -2,11 +2,11 @@
 
 /*
  * as much as possible prefer using comprehensive keys (such as "Check here") instead of
- * formatted keys (eg "PiwigoClientServerExt_check_button"), it would make your code more readable and help
+ * formatted keys (eg "PiwigoClientWsExts_check_button"), it would make your code more readable and help
  * the translation team as well
  */
 
-$lang['PiwigoClientExt'] = 'PiwigoClientExt';
-$lang['What PiwigoClientExt can do for me?'] = 'Ce que PiwigoClientExt peut faire pour moi?';
+$lang['PiwigoClientWsExts'] = 'PiwigoClientWsExts';
+$lang['What PiwigoClientWsExts can do for me?'] = 'Que peut faire PiwigoClientWsExts pour moi ?';
 
 ?>

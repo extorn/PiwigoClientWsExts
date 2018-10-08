@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: PiwigoClientServerExt
+Plugin Name: PiwigoClientWsExts
 Version: 1.0.0
 Description: This plugin exposes more of the standard Piwigo website functionality for the PiwigoClient Android app (or others) to  make use of.
 Plugin URI: http://piwigo.org/ext/extension_view.php
@@ -24,10 +24,10 @@ global $prefixeTable;
 
 define('PWG_CLI_EXT_ID',      basename(dirname(__FILE__)));
 define('PWG_CLI_EXT_PATH' ,   PHPWG_PLUGINS_PATH . PWG_CLI_EXT_ID . '/');
-define('PWG_CLI_EXT_TABLE',   $prefixeTable . 'PiwigoClientServerExt');
+define('PWG_CLI_EXT_TABLE',   $prefixeTable . 'PiwigoClientWsExts');
 define('PWG_CLI_EXT_ADMIN',   get_root_url() . 'admin.php?page=plugin-' . PWG_CLI_EXT_ID);
-define('PWG_CLI_EXT_PUBLIC',  get_absolute_root_url() . make_index_url(array('section' => 'PiwigoClientServerExt')) . '/');
-define('PWG_CLI_EXT_DIR',     PHPWG_ROOT_PATH . PWG_LOCAL_DIR . 'PiwigoClientServerExt/');
+define('PWG_CLI_EXT_PUBLIC',  get_absolute_root_url() . make_index_url(array('section' => 'PiwigoClientWsExts')) . '/');
+define('PWG_CLI_EXT_DIR',     PHPWG_ROOT_PATH . PWG_LOCAL_DIR . 'PiwigoClientWsExts/');
 
 
 
@@ -35,13 +35,13 @@ define('PWG_CLI_EXT_DIR',     PHPWG_ROOT_PATH . PWG_LOCAL_DIR . 'PiwigoClientSer
 // | Add event handlers                                                    |
 // +-----------------------------------------------------------------------+
 // init the plugin
-add_event_handler('init', 'PiwigoClientServerExt_init');
+add_event_handler('init', 'PiwigoClientWsExts_init');
 
 // file containing API function
 $ws_file = PWG_CLI_EXT_PATH . 'include/ws_functions.inc.php';
 
 // add API function
-add_event_handler('ws_add_methods', 'PiwigoClientServerExt_ws_add_methods',
+add_event_handler('ws_add_methods', 'PiwigoClientWsExts_ws_add_methods',
     EVENT_HANDLER_PRIORITY_NEUTRAL, $ws_file);
 
 if (defined('IN_ADMIN')) {
@@ -49,7 +49,7 @@ if (defined('IN_ADMIN')) {
   // file containing all admin handlers functions
   $admin_file = PWG_CLI_EXT_PATH . 'include/admin_events.inc.php';
   // admin plugins menu link
-    add_event_handler('get_admin_plugin_menu_links', 'PiwigoClientServerExt_admin_plugin_menu_links',
+    add_event_handler('get_admin_plugin_menu_links', 'PiwigoClientWsExts_admin_plugin_menu_links',
       EVENT_HANDLER_PRIORITY_NEUTRAL, $admin_file);
 }
 else
@@ -64,7 +64,7 @@ else
  *   - unserialize configuration
  *   - load language
  */
-function PiwigoClientServerExt_init()
+function PiwigoClientWsExts_init()
 {
   global $conf;
 

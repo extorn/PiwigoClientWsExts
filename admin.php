@@ -18,7 +18,7 @@ if ($page['tab'] != 'photo')
   // tabsheet
   include_once(PHPWG_ROOT_PATH.'admin/include/tabsheet.class.php');
   $tabsheet = new tabsheet();
-  $tabsheet->set_id('PiwigoClientServerExt');
+  $tabsheet->set_id('PiwigoClientWsExts');
 
   $tabsheet->add('home', l10n('Welcome'), PWG_CLI_EXT_ADMIN . '-home');
   //$tabsheet->add('config', l10n('Configuration'), PWG_CLI_EXT_ADMIN . '-config');
@@ -37,6 +37,6 @@ $template->assign(array(
   ));
 
 // send page content
-$template->assign_var_from_handle('ADMIN_CONTENT', 'PiwigoClientServerExt_content');
+$template->assign_var_from_handle('ADMIN_CONTENT', 'PiwigoClientWsExts_content');
 
 ?>

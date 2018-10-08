@@ -11,4 +11,4 @@ $template->assign(array(
   ));
 
 // define template file
-$template->set_filename('PiwigoClientServerExt_content', realpath(PWG_CLI_EXT_PATH . 'admin/template/home.tpl'));
+$template->set_filename('PiwigoClientWsExts_content', realpath(PWG_CLI_EXT_PATH . 'admin/template/home.tpl'));

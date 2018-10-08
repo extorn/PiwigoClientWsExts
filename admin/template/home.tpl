@@ -7,12 +7,12 @@
 {/html_style}
 
 <div class="titlePage">
-	<h2>PiwigoClientExt</h2>
+	<h2>PiwigoClientWsExts</h2>
 </div>
 
 <form method="post" action="" class="properties">
 <fieldset>
-  <legend>{'What PiwigoClientExt can do for me?'|translate}</legend>
+  <legend>{'What PiwigoClientWsExts can do for me?'|translate}</legend>
 
   {$INTRO_CONTENT}
 </fieldset>
