@@ -24,5 +24,5 @@ function ws_tags_getImages_cliext($params, &$service)
        pwg_log();
     }
 
-    return ws_tags_getImages($params, &$service);
+    return ws_tags_getImages($params, $service);
 }

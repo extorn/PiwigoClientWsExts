@@ -49,7 +49,7 @@ function ws_categories_getImages_cliext($params, &$service)
      $page['category']['id'] = $params['cat_id'][0];
      pwg_log();
   }
-  return ws_categories_getImages($params, &$service);
+  return ws_categories_getImages($params, $service);
 }
 
 ?>
