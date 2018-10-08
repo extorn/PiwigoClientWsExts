@@ -7,7 +7,6 @@ defined('PWG_CLI_EXT_PATH') or die('Hacking attempt!');
 
 // send variables to template
 $template->assign(array(
-  'PiwigoClientServerExt' => $conf['PiwigoClientServerExt'],
   'INTRO_CONTENT' => load_language('intro.html', PWG_CLI_EXT_PATH, array('return'=>true)),
   ));
 

@@ -44,6 +44,19 @@ $ws_file = PWG_CLI_EXT_PATH . 'include/ws_functions.inc.php';
 add_event_handler('ws_add_methods', 'PiwigoClientServerExt_ws_add_methods',
     EVENT_HANDLER_PRIORITY_NEUTRAL, $ws_file);
 
+if (defined('IN_ADMIN')) {
+
+  // file containing all admin handlers functions
+  $admin_file = PWG_CLI_EXT_PATH . 'include/admin_events.inc.php';
+  // admin plugins menu link
+    add_event_handler('get_admin_plugin_menu_links', 'PiwigoClientServerExt_admin_plugin_menu_links',
+      EVENT_HANDLER_PRIORITY_NEUTRAL, $admin_file);
+}
+else
+{
+   // file containing all public handlers functions
+   $public_file = PWG_CLI_EXT_PATH . 'include/public_events.inc.php';
+}
 
 /**
  * plugin initialization
