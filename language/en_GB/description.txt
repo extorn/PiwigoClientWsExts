@@ -1,0 +1,1 @@
+This plugin exposes more of the standard Piwigo website functionality for the PiwigoClient Android app (or others) to  make use of.

@@ -1,0 +1,1 @@
+Dieses Plugin stellt mehr von der standardmäßigen Funktionalität der Piwigo-Website für die PiwigoClient Android-App (oder andere) zur Verfügung.
