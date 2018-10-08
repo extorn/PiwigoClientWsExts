@@ -103,7 +103,7 @@ function PiwigoClientWsExts_ws_add_methods($arr)
       );
 
   $service->addMethod(
-        'piwigo_client.images.listOrphans',
+        'piwigo_client.images.getOrphans',
         'ws_images_listOrphans',
         array(
             'per_page' =>     array('default'=>100,
@@ -141,8 +141,8 @@ function PiwigoClientWsExts_ws_add_methods($arr)
         array('post_only'=>true)
       );
       $service->addMethod(
-        'piwigo_client.favorites.list',
-        'ws_favorites_list_contents_cliext',
+        'piwigo_client.favorites.getList',
+        'ws_favorites_get_list_cliext',
         array(
           'per_page' =>     array('default'=>100,
                                           'maxValue'=>$conf['ws_max_images_per_page'],

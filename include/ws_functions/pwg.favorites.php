@@ -69,7 +69,7 @@ function ws_favorites_remove_image_cliext($params, $service)
  *    @option int per_page
  *    @option int page
  */
-function ws_favorites_list_contents_cliext($params, $service)
+function ws_favorites_get_list_cliext($params, $service)
 {
   global $user, $conf;
 

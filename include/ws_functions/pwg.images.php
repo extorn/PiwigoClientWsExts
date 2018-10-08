@@ -35,6 +35,8 @@ function ws_images_getInfo_cliext($params, $service)
   $query='
 SELECT *
   FROM '. IMAGES_TABLE .'
+  LEFT OUTER JOIN '.FAVORITES_TABLE.' ft
+  ON id=ft.image_id
   WHERE id='. $params['image_id'] .
     get_sql_condition_FandF(
       array('visible_images' => 'id'),
@@ -51,6 +53,13 @@ LIMIT 1
 
   $image_row = pwg_db_fetch_assoc($result);
   $image_row = array_merge($image_row, ws_std_get_urls($image_row));
+
+  $isFavorite = 'false';
+  if($image_row['image_id'] != null)
+  {
+    $isFavorite = 'true';
+  }
+
 
   //-------------------------------------------------------- related categories
   $query = '
@@ -199,6 +208,7 @@ SELECT id, date, author, content
   }
 
   $ret = $image_row;
+  $ret['isFavorite']=$isFavorite;
   foreach (array('id','width','height','hit','filesize') as $k)
   {
     if (isset($ret[$k]))
