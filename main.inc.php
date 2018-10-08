@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: PiwigoClientWsExts
-Version: 1.0.1
+Version: 1.0.2
 Description: This plugin exposes more of the standard Piwigo website functionality for the PiwigoClient Android app (or others) to  make use of.
 Plugin URI: http://piwigo.org/ext/extension_view.php
 Author: Gareth Deli
