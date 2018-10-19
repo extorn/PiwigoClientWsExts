@@ -164,6 +164,34 @@ function PiwigoClientWsExts_ws_add_methods($arr)
       );
 
 
+    //UPLOAD FUNCTIONS
+    $service->addMethod(
+        'piwigo_client.upload.clean',
+        'ws_upload_clean',
+        array(
+            'pwg_token' =>            array(),
+        ),
+        'PiwigoClient: Clears all failed partial uploads made by PiwigoClient from the server',
+        $ws_functions_root . 'pwg.upload.php',
+        array(
+            'post_only'=>true,
+            'admin_only' => true, // you can restrict access to admins only
+        )
+      );
+
+      //GENERAL INFO FUNCTIONS
+      $service->addMethod(
+          'piwigo_client.getPluginDetails',
+          'ws_plugin_version',
+          array(
+          ),
+          'PiwigoClient: Retrieves information about this plugin and its current settings to clients',
+          $ws_functions_root . 'piwigo.client.php',
+          array(
+              'post_only'=>true,
+          )
+        );
+
 
   /* EXAMPLE USAGE
 

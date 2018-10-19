@@ -1,7 +1,7 @@
 <?php
 /**
  * This is the main administration page, if you have only one admin page you can put
- * directly its code here or using the tabsheet system like bellow
+ * directly its code here or using the tabsheet system like below
  */
 
 defined('PWG_CLI_EXT_PATH') or die('Hacking attempt!');

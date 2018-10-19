@@ -4,33 +4,33 @@ plugins {
 
 import org.apache.tools.ant.filters.ReplaceTokens
 
-version = '1.0.4'
+version = '1.0.5'
 
 
 task myClean(type: Delete) {
     delete rootProject.buildDir
 }
 
-task updateVersion(type: Copy) {
+task updateVersion(type: Copy, dependsOn:myClean) {
     from "src"
     into "${rootProject.buildDir}/${rootProject.name}"
     filter(ReplaceTokens, tokens: [plugin_name: rootProject.name, plugin_version: rootProject.version])
 }
 
-task myzip(type: Zip, group: "Archive", description: "Archives sources in a zip file") {
+task copyLicenceDetails(type: Copy, dependsOn:updateVersion) {
     from(".") {
-        into(rootProject.name)
         include "README.md"
         include "LICENCE"
     }
-    from("${rootProject.buildDir}/${rootProject.name}") {
-        into(rootProject.name)
-        include "*/**"
-    }
+    into "${rootProject.buildDir}/${rootProject.name}"
+}
+
+task myzip(type: Zip, group: "Archive", description: "Archives sources in a zip file", dependsOn:copyLicenceDetails) {
+    from "${rootProject.buildDir}/${rootProject.name}"
+    into(rootProject.name)
+    include "*/**"
     destinationDir file(rootProject.buildDir)
     setArchiveName rootProject.name + "_" + rootProject.version + ".zip"
 }
 
-assemble.dependsOn myClean
-assemble.dependsOn updateVersion
 assemble.dependsOn myzip
