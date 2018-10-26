@@ -104,7 +104,7 @@ function PiwigoClientWsExts_ws_add_methods($arr)
 
   $service->addMethod(
         'piwigo_client.images.getOrphans',
-        'ws_images_listOrphans',
+        'ws_images_listOrphans_cliext',
         array(
             'per_page' =>     array('default'=>100,
                                     'maxValue'=>$conf['ws_max_images_per_page'],
