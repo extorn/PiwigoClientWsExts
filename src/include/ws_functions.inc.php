@@ -114,7 +114,7 @@ function PiwigoClientWsExts_ws_add_methods($arr)
           ),
         'PiwigoClient: Lists orphaned images',
         $ws_functions_root . 'pwg.images.php',
-        array('admin_only'=>true, 'post_only'=>true)
+        array('admin_only'=>true, 'post_only'=>false)
       );
 
   // FAVORITES FUNCTIONS
@@ -152,7 +152,7 @@ function PiwigoClientWsExts_ws_add_methods($arr)
           ),
         'PiwigoClient: List all images on the present user\'s list of favorites.',
         $ws_functions_root . 'pwg.favorites.php',
-        array('post_only'=>true)
+        array('post_only'=>false)
       );
       $service->addMethod(
         'piwigo_client.favorites.removeAll',
@@ -188,7 +188,7 @@ function PiwigoClientWsExts_ws_add_methods($arr)
           'PiwigoClient: Retrieves information about this plugin and its current settings to clients',
           $ws_functions_root . 'piwigo.client.php',
           array(
-              'post_only'=>true,
+              'post_only'=>false,
           )
         );
 
