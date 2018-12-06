@@ -56,7 +56,7 @@ function PiwigoClientWsExts_ws_add_methods($arr)
           'order' =>        array('default'=>null,
                                   'info'=>'id, file, name, hit, rating_score, date_creation, date_available, random'),
           ), $f_params),
-        'PiwigoClient: Returns elements for the corresponding tags. Fill at least tag_id, tag_url_name or tag_name.',
+        'PiwigoClient: Returns elements for the corresponding tags (but logs the user\'s access). Fill at least tag_id, tag_url_name or tag_name.',
         $ws_functions_root . 'pwg.tags.php'
       );
 
@@ -79,7 +79,7 @@ function PiwigoClientWsExts_ws_add_methods($arr)
           'order' =>      array('default'=>null,
                                 'info'=>'id, file, name, hit, rating_score, date_creation, date_available, random'),
           ), $f_params),
-        'PiwigoClient: Returns elements for the corresponding categories.
+        'PiwigoClient: Returns elements for the corresponding categories (but logs the user\'s access).
   <br><b>cat_id</b> can be empty if <b>recursive</b> is true.
   <br><b>order</b> comma separated fields for sorting',
         $ws_functions_root . 'pwg.categories.php'
@@ -98,7 +98,7 @@ function PiwigoClientWsExts_ws_add_methods($arr)
                                         'maxValue'=>2*$conf['nb_comment_page'],
                                         'type'=>WS_TYPE_INT|WS_TYPE_POSITIVE),
           ),
-        'PiwigoClient: Returns information about an image',
+        'PiwigoClient: Returns information about an image  (but logs the user\'s access)',
         $ws_functions_root . 'pwg.images.php'
       );
 
@@ -118,6 +118,23 @@ function PiwigoClientWsExts_ws_add_methods($arr)
       );
 
   // FAVORITES FUNCTIONS
+
+  $service->addMethod(
+          'piwigo_client.favorites.getImages',
+          'ws_favorites_getImages_cliext',
+          array_merge(array(
+            'per_page' =>   array('default'=>100,
+                                  'maxValue'=>$conf['ws_max_images_per_page'],
+                                  'type'=>WS_TYPE_INT|WS_TYPE_POSITIVE),
+            'page' =>       array('default'=>0,
+                                  'type'=>WS_TYPE_INT|WS_TYPE_POSITIVE),
+            'order' =>      array('default'=>null,
+                                  'info'=>'id, file, name, hit, rating_score, date_creation, date_available, random'),
+            ), $f_params),
+          'PiwigoClient: Retrieves a block of the present user\'s favorite images (result is identical format to categories.getImages).',
+          $ws_functions_root . 'pwg.favorites.php',
+          array('post_only'=>false)
+        );
 
   $service->addMethod(
         'piwigo_client.favorites.addImage',
@@ -150,7 +167,7 @@ function PiwigoClientWsExts_ws_add_methods($arr)
           'page' =>         array('default'=>0,
                                   'type'=>WS_TYPE_INT|WS_TYPE_POSITIVE),
           ),
-        'PiwigoClient: List all images on the present user\'s list of favorites.',
+        'PiwigoClient: List ids for all images on the present user\'s list of favorites.',
         $ws_functions_root . 'pwg.favorites.php',
         array('post_only'=>false)
       );
