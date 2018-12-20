@@ -216,9 +216,12 @@ function PiwigoClientWsExts_ws_add_methods($arr)
             'piwigo_client.gallery.getConfig',
             'ws_gallery_config',
             array(
-            ),
-            'PiwigoClient: Retrieves information about the PIWIGO gallery and relevant settings for clients',
-            $ws_functions_root . 'pwg.config.php',
+                        'show_comments' => array('default'=>false,
+                                                          'type'=>WS_TYPE_BOOL),
+                    ),
+            'PiwigoClient: Retrieves information about the PIWIGO gallery and relevant settings for clients
+            <br/>Set the show_comments parameter to true if you wish to see a definition for the values returned',
+            $ws_functions_root . 'pwg.gallery.php',
             array(
                 'post_only'=>false,
             )

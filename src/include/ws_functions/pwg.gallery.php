@@ -35,9 +35,14 @@ function ws_gallery_config($params, &$service) {
 
     $images = array();
 
+    $columns='param,value';
+    if ($params['show_comments'])
+    {
+        $columns .= ',comment';
+    }
     $query = '
-      SELECT param,value,comment FROM  '.CONFIG_TABLE.'
-        WHERE param in ("gallery_title", "gallery_locked", ""rate", "rate_anonymous", "activate_comments", "comments_forall", "comments_author_mandatory", "comments_email_mandatory", "user_can_edit_comment", "user_can_delete_comment")
+      SELECT '.$columns.' FROM  '.CONFIG_TABLE.'
+        WHERE param in ("gallery_title", "gallery_locked", "rate", "rate_anonymous", "activate_comments", "comments_forall", "comments_author_mandatory", "comments_email_mandatory", "user_can_edit_comment", "user_can_delete_comment")
         ORDER BY param ASC;';
 
       $result = pwg_query($query);
