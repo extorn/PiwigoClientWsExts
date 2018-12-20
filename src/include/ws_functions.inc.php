@@ -212,6 +212,18 @@ function PiwigoClientWsExts_ws_add_methods($arr)
           )
         );
 
+        $service->addMethod(
+            'piwigo_client.gallery.getConfig',
+            'ws_gallery_config',
+            array(
+            ),
+            'PiwigoClient: Retrieves information about the PIWIGO gallery and relevant settings for clients',
+            $ws_functions_root . 'pwg.config.php',
+            array(
+                'post_only'=>false,
+            )
+          );
+
 
   /* EXAMPLE USAGE
 
