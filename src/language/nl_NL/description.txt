@@ -1,0 +1,1 @@
+Deze plug-in biedt meer van de standaard Piwigo-websitefunctionaliteit waar de PiwigoClient Android-app (of andere) gebruik van kan maken.
