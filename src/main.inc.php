@@ -20,7 +20,7 @@ defined('PHPWG_ROOT_PATH') or die('Hacking attempt!');
 // +-----------------------------------------------------------------------+
 // | Define plugin constants                                               |
 // +-----------------------------------------------------------------------+
-global $prefixeTable;
+global $conf;
 
 define('PWG_CLI_EXT_ID',      basename(dirname(__FILE__)));
 define('PWG_CLI_EXT_PATH' ,   PHPWG_PLUGINS_PATH . PWG_CLI_EXT_ID . '/');
@@ -37,12 +37,15 @@ define('PWG_CLI_EXT_DIR',     PHPWG_ROOT_PATH . PWG_LOCAL_DIR . 'PiwigoClientWsE
 // init the plugin
 add_event_handler('init', 'PiwigoClientWsExts_init');
 
+
 // file containing API function
 $ws_file = PWG_CLI_EXT_PATH . 'include/ws_functions.inc.php';
 
 // add API function
 add_event_handler('ws_add_methods', 'PiwigoClientWsExts_ws_add_methods',
     EVENT_HANDLER_PRIORITY_NEUTRAL, $ws_file);
+
+
 
 if (defined('IN_ADMIN')) {
 
@@ -52,11 +55,11 @@ if (defined('IN_ADMIN')) {
     add_event_handler('get_admin_plugin_menu_links', 'PiwigoClientWsExts_admin_plugin_menu_links',
       EVENT_HANDLER_PRIORITY_NEUTRAL, $admin_file);
 }
-else
+/* else
 {
    // file containing all public handlers functions
    $public_file = PWG_CLI_EXT_PATH . 'include/public_events.inc.php';
-}
+} */
 
 /**
  * plugin initialization
@@ -70,6 +73,15 @@ function PiwigoClientWsExts_init()
 
   // load plugin language file
   load_language('plugin.lang', PWG_CLI_EXT_PATH);
+  
+  if(isset($conf['ExtendedDescription']))
+  {
+      // file containing support for extended description plugin
+      $ext_file = PWG_CLI_EXT_PATH . 'include/pwg.extended_description.php';
+      
+      // add a hook to support extended description plugin tags
+      add_event_handler ('render_category_description', 'get_extended_desc_cliext', 51, $ext_file);
+  }
 
 }
 

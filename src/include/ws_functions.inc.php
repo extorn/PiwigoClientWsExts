@@ -86,6 +86,39 @@ function PiwigoClientWsExts_ws_add_methods($arr)
         <br><b>order</b> comma separated fields for sorting',
         $ws_functions_root . 'pwg.categories.php'
       );
+  
+  $service->addMethod(
+      'piwigo_client.categories.getList',
+      'ws_categories_getList_cliext',
+      array(
+          'cat_id' =>       array('default'=>null,
+              'type'=>WS_TYPE_INT|WS_TYPE_POSITIVE,
+              'info'=>'Parent category. "0" or empty for root.'),
+          'recursive' =>    array('default'=>false,
+              'type'=>WS_TYPE_BOOL),
+          'public' =>       array('default'=>false,
+              'type'=>WS_TYPE_BOOL),
+          'tree_output' =>  array('default'=>false,
+              'type'=>WS_TYPE_BOOL),
+          'fullname' =>     array('default'=>false,
+              'type'=>WS_TYPE_BOOL),
+          'thumbnail_size' => array(
+              'default' => IMG_THUMB,
+              'info' => implode(',', array_keys(ImageStdParams::get_defined_type_map()))
+          ),
+      ),
+      'Extends the standard Returns a list of categories to support Extended Descriptions plugin tags.',
+      $ws_functions_root . 'pwg.categories.php'
+      );
+  
+  $service->addMethod(
+      'piwigo_client.categories.getAdminList',
+      'ws_categories_getAdminList_cliext',
+      null,
+      'Extends the standard - Get albums list as displayed on admin page - to support Extended Descriptions plugin tags.',
+      $ws_functions_root . 'pwg.categories.php',
+      array('admin_only'=>true)
+      );
 
   // IMAGES FUNCTIONS
 

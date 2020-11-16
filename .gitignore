@@ -12,3 +12,6 @@ build
 # Eclipse
 .settings
 .project
+/gradlew
+/gradlew.bat
+/local.properties
