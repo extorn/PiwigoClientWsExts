@@ -15,3 +15,5 @@ build
 /gradlew
 /gradlew.bat
 /local.properties
+/bin/
+/.classpath

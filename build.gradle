@@ -2,9 +2,19 @@ plugins {
     id "base"
 }
 
+repositories {
+    // Use jcenter for resolving dependencies.
+    // You can declare any Maven/Ivy/file repository here.
+    jcenter()
+}
+
+dependencies {
+}
+
 import org.apache.tools.ant.filters.ReplaceTokens
 
 version = '1.0.11'
+
 
 
 task myClean(type: Delete) {
