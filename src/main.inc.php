@@ -6,6 +6,7 @@ Description: This plugin exposes more of the standard Piwigo website functionali
 Plugin URI: https://piwigo.org/ext/extension_view.php?eid=880
 Author: Gareth Deli
 Author URI: https://github.com/extorn/@plugin_name@
+Has Settings: true
 */
 
 /**
