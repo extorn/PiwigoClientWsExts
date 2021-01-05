@@ -154,24 +154,33 @@ SELECT
         }
         else
         {
-            $row['name'] = strip_tags(
-                trigger_change(
-                    'render_category_name',
-                    $row['name'],
-                    'ws_categories_getList')
-                );
+            # render_category_name 'vars' => array('string', 'category_name', 'string', 'location')
+            $row['name'] = trigger_change(
+                'render_category_name', # action
+                $render_params['text'], # the value to send
+                'ws_categories_getList'); # any params (here it is the caller of the event).
+            if ($row['name'] == 'ws_categories_getList') {
+                $row['name'] = $render_params['text'];
+            }
+            $row['name'] = strip_tags($row['name']);
+                
         }
         
         // change the text to the comment now.
         $render_params['text'] = $row['comment'];
         
-        $row['comment'] = strip_tags(
-            trigger_change(
-                'render_category_description',
-                'ws_categories_getList',
-                $render_params
-                )
+        # render_category_description 'vars' => array('string', 'category_description', 'string', 'action'),
+        $row['comment'] = trigger_change(
+            'render_category_description', # action
+            'ws_categories_getList', # this should be category description really but we use this as a flag so we know we invoked the event.
+            $render_params  # any params - we pass the value in here with some other data as an array. Because we catch this event before anyone else, we can do this.
             );
+        if ($row['comment'] == 'ws_categories_getList') {
+            $row['comment'] = $render_params['text'];
+        }
+        $row['comment'] = strip_tags($row['comment']);
+        
+        
         
         // management of the album thumbnail -- starts here
         //
@@ -404,6 +413,7 @@ SELECT id, name, comment, uppercats, global_rank, dir, status
                 )
             );
         
+        
         $row['fullname'] = strip_tags(
             get_cat_display_name_cache(
                 $row['uppercats'],
@@ -414,13 +424,16 @@ SELECT id, name, comment, uppercats, global_rank, dir, status
         // change the text to the comment now.
         $render_params['text'] = $row['comment'];
         
-        $row['comment'] = strip_tags(
-            trigger_change(
-                'render_category_description',
-                'ws_categories_getAdminList',
-                $render_params
-                )
+        # render_category_description 'vars' => array('string', 'category_description', 'string', 'action'),
+        $row['comment'] = trigger_change(
+            'render_category_description', # action
+            'ws_categories_getAdminList', # this should be category description really but we use this as a flag so we know we invoked the event.
+            $render_params  # any params - we pass the value in here with some other data as an array. Because we catch this event before anyone else, we can do this.
             );
+        if ($row['comment'] == 'ws_categories_getAdminList') {
+            $row['comment'] = $render_params['text'];
+        }
+        $row['comment'] = strip_tags($row['comment']);
         
         $cats[] = $row;
     }
