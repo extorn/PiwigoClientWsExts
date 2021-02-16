@@ -40,7 +40,7 @@ function ws_categories_getImages_cliext($params, &$service)
 
   include_once(PHPWG_ROOT_PATH.'include/ws_functions/pwg.categories.php');
   
-  if (get_pwg_token() != $params['pwg_token'])
+  if ($params['pwg_token'] != null && get_pwg_token() != $params['pwg_token'])
   {
       return new PwgError(403, 'Invalid security token');
   }
@@ -69,7 +69,7 @@ function ws_categories_getList_cliExt($params, &$service)
 {
     global $user, $conf;
     
-    if (get_pwg_token() != $params['pwg_token'])
+    if ($params['pwg_token'] != null && get_pwg_token() != $params['pwg_token'])
     {
         return new PwgError(403, 'Invalid security token');
     }

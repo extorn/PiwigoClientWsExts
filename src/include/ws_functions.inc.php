@@ -169,6 +169,7 @@ function PiwigoClientWsExts_ws_add_methods($arr)
                                   'type'=>WS_TYPE_INT|WS_TYPE_POSITIVE),
             'order' =>      array('default'=>null,
                                   'info'=>'id, file, name, hit, rating_score, date_creation, date_available, random'),
+            'pwg_token' =>  array('default'=>null)
             ), $f_params),
           'PiwigoClient: Retrieves a block of the present user\'s favorite images (result is identical format to categories.getImages).',
           $ws_functions_root . 'pwg.favorites.php',
@@ -205,6 +206,7 @@ function PiwigoClientWsExts_ws_add_methods($arr)
                                           'type'=>WS_TYPE_INT|WS_TYPE_POSITIVE),
           'page' =>         array('default'=>0,
                                   'type'=>WS_TYPE_INT|WS_TYPE_POSITIVE),
+          'pwg_token' =>  array('default'=>null)
           ),
         'PiwigoClient: List ids for all images on the present user\'s list of favorites.',
         $ws_functions_root . 'pwg.favorites.php',

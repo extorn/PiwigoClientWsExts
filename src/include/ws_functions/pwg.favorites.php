@@ -70,6 +70,11 @@ function ws_favorites_remove_image_cliext($params, $service)
 function ws_favorites_get_list_cliext($params, $service)
 {
   global $user, $conf;
+  
+  if ($params['pwg_token'] != null && get_pwg_token() != $params['pwg_token'])
+  {
+      return new PwgError(403, 'Invalid security token');
+  }
 
   $images = array();
 
@@ -127,6 +132,11 @@ function ws_favorites_getImages_cliext($params, &$service)
 {
   global $user, $conf, $page;
 
+  if ($params['pwg_token'] != null && get_pwg_token() != $params['pwg_token'])
+  {
+      return new PwgError(403, 'Invalid security token');
+  }
+  
     $images = array();
 
     //------------------------------------------------- get the related categories
