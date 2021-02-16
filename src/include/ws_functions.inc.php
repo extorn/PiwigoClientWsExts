@@ -107,9 +107,8 @@ function PiwigoClientWsExts_ws_add_methods($arr)
               'type'=>WS_TYPE_BOOL),
           'thumbnail_size' => array(
               'default' => IMG_THUMB,
-              'info' => implode(',', array_keys(ImageStdParams::get_defined_type_map())),
+              'info' => implode(',', array_keys(ImageStdParams::get_defined_type_map()))),
           'pwg_token' =>  array('default'=>null)
-          ),
       ),
       'Extends the standard Returns a list of categories to support Extended Descriptions plugin tags.',
       $ws_functions_root . 'pwg.categories.php'
