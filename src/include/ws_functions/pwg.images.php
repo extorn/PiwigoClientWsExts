@@ -26,8 +26,10 @@
 function ws_images_getInfo_cliext($params, $service)
 {
   global $user, $conf;
+  
+  // include_once(PWG_CLI_EXT_PATH.'include/functions.inc.php');
 
-  # This is called to retrieve all details for an image, so is reasonable to assume the user is viewing the image.
+  // This is called to retrieve all details for an image, so is reasonable to assume the user is viewing the image.
   pwg_log($params['image_id'], 'picture');
 
   $query='
@@ -218,6 +220,58 @@ SELECT id, date, author, content
   {
     unset($ret[$k]);
   }
+  
+  // Load any alternative image formats if they're in use
+  if ($conf['enable_formats'])
+  {
+      
+      $formats_of = array();                                                                                                                                                                                                                                                                                                                                                                                        $query = '                                                                                                                                                                                               SELECT
+       image_id,
+       ext
+    FROM '.IMAGE_FORMAT_TABLE.'
+    WHERE image_id = '.$image_row['id'].';';
+      $fmt_result = pwg_query($query);
+      while ($fmt_row = pwg_db_fetch_assoc($fmt_result))
+      {
+          $img_id = $fmt_row['image_id'];
+          if (!isset($formats_of[ $img_id ] ))
+          {
+              $formats_of[ $img_id ] = array();
+          }
+          $formats_of[ $img_id ][] = $fmt_row['ext'];
+      }
+      
+      if (isset($formats_of[ $image_row['id'] ]))
+      {
+          
+          foreach ($formats_of[ $image_row['id'] ] as $format_ext)
+          {
+              $format_file_path = original_to_format($image_row['path'], $format_ext);
+              if (is_file($format_file_path))
+              {
+                  $format_file_size = floor(filesize($format_file_path) / 1024);
+                  // build the uri using the first acceptable category
+                  //$format_file_uri=$image_row['id'].','.$format_file_path.','.$related_categories[0]['id'];
+                  //$url_params['category'] = $related_categories[0];
+                  //$url_params['image_id'] = $image_row['id'];
+                  //$url_params['image_file'] = $image_row['file'];
+                  //$url_params['format'] = $format_ext;
+                  //$format_file_uri = make_picture_url($url_params);
+                  //             $format_file_uri = make_picture_url($image_row['id'], $format_file_path, $related_categories[0]['id']);
+                  $url_params['path']=$image_row['id'].'/'.$format_file_path;
+                  $format_file_uri = get_element_url($url_params);
+                  $formats[] = array(
+                      'format' => new PwgNamedStruct(
+                          array(
+                              'ext' => $format_ext,
+                              'uri' => $format_file_uri,
+                              'sizeKb' => $format_file_size)
+                          ));
+              }
+          }
+      }
+      $ret['formats'] = $formats;
+  }
 
   $ret['rates'] = array(
     WS_XML_ATTRIBUTES => $rating
@@ -263,6 +317,8 @@ SELECT id, date, author, content
       );
   }
 }
+
+
 
 /**
  * API method

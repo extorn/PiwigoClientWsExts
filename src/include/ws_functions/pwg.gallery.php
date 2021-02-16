@@ -50,7 +50,12 @@ function ws_gallery_config($params, &$service) {
       {
         $configItems[] = $row;
       }
-
+      
+      $query = 'SELECT id, galleries_url from '.SITES_TABLE.';';
+      $result = pwg_query($query);
+      $configItems['sites'] = array();
+      $configItems['sites'] = pwg_db_fetch_assoc($result);
+      
       return array(
           'configItems' => $configItems);
 }

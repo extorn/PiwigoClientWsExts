@@ -10,6 +10,7 @@ function PiwigoClientWsExts_ws_add_methods($arr)
   $service = &$arr[0];
 
   include_once(PHPWG_ROOT_PATH.'include/ws_functions.inc.php');
+  include_once(PWG_CLI_EXT_PATH.'include/functions.inc.php');
   $ws_functions_root = PWG_CLI_EXT_PATH.'include/ws_functions/';
 
   $f_params = array(
@@ -55,6 +56,7 @@ function PiwigoClientWsExts_ws_add_methods($arr)
                                   'type'=>WS_TYPE_INT|WS_TYPE_POSITIVE),
           'order' =>        array('default'=>null,
                                   'info'=>'id, file, name, hit, rating_score, date_creation, date_available, random'),
+          'pwg_token' =>  array('default'=>null),
           ), $f_params),
         'PiwigoClient: Returns elements for the corresponding tags (but logs the user\'s access). Fill at least tag_id, tag_url_name or tag_name.
         <br/>Builds on and is a direct replacement for pwg.images.getInfo',
@@ -79,6 +81,7 @@ function PiwigoClientWsExts_ws_add_methods($arr)
                                 'type'=>WS_TYPE_INT|WS_TYPE_POSITIVE),
           'order' =>      array('default'=>null,
                                 'info'=>'id, file, name, hit, rating_score, date_creation, date_available, random'),
+          'pwg_token' =>  array('default'=>null)
           ), $f_params),
         'PiwigoClient: Returns elements for the corresponding categories (but logs the user\'s access).
         <br/>Builds on and is a direct replacement for pwg.images.getInfo
@@ -104,7 +107,8 @@ function PiwigoClientWsExts_ws_add_methods($arr)
               'type'=>WS_TYPE_BOOL),
           'thumbnail_size' => array(
               'default' => IMG_THUMB,
-              'info' => implode(',', array_keys(ImageStdParams::get_defined_type_map()))
+              'info' => implode(',', array_keys(ImageStdParams::get_defined_type_map())),
+          'pwg_token' =>  array('default'=>null)
           ),
       ),
       'Extends the standard Returns a list of categories to support Extended Descriptions plugin tags.',

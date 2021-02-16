@@ -39,6 +39,11 @@ function ws_categories_getImages_cliext($params, &$service)
   global $user, $conf, $page;
 
   include_once(PHPWG_ROOT_PATH.'include/ws_functions/pwg.categories.php');
+  
+  if (get_pwg_token() != $params['pwg_token'])
+  {
+      return new PwgError(403, 'Invalid security token');
+  }
 
   if(count($params['cat_id']) == 1)
   {
@@ -63,6 +68,13 @@ function ws_categories_getImages_cliext($params, &$service)
 function ws_categories_getList_cliExt($params, &$service)
 {
     global $user, $conf;
+    
+    if (get_pwg_token() != $params['pwg_token'])
+    {
+        return new PwgError(403, 'Invalid security token');
+    }
+    
+    
     
     if (!in_array($params['thumbnail_size'], array_keys(ImageStdParams::get_defined_type_map())))
     {
