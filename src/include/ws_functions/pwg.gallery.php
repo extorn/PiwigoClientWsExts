@@ -53,11 +53,19 @@ function ws_gallery_config($params, &$service) {
       
       $sites_query = 'SELECT id, galleries_url from '.SITES_TABLE.';';
       $sites_result = pwg_query($sites_query);
-      $configItems['sites'] = array();
-      $configItems['sites'] = pwg_db_fetch_assoc($sites_result);
+      $sites = array();
+      while($sites_row = pwg_db_fetch_assoc($sites_result))
+      {
+          $site_path = preg_replace('#^\./(.*)\/$#','$1',$sites_row['galleries_url']);
+          $sites[] = array('id'   => $sites_row['id'],
+              'path' => $site_path);
+      }
       
       return array(
-          'configItems' => $configItems);
+          'configItems' => $configItems,
+          'sites' => $sites);
+      
+      
 }
 
 ?>
