@@ -37,7 +37,7 @@ function ws_gallery_config($params, &$service) {
     if ($params['show_comments'])
     {
         $columns .= ',comment';
-    }
+    }   
     $query = '
       SELECT '.$columns.' FROM  '.CONFIG_TABLE.'
         WHERE param in ("gallery_title", "gallery_locked", "rate", "rate_anonymous", "activate_comments", "comments_forall", "comments_author_mandatory", "comments_email_mandatory", "user_can_edit_comment", "user_can_delete_comment")
@@ -51,10 +51,10 @@ function ws_gallery_config($params, &$service) {
         $configItems[] = $row;
       }
       
-      $query = 'SELECT id, galleries_url from '.SITES_TABLE.';';
-      $result = pwg_query($query);
+      $sites_query = 'SELECT id, galleries_url from '.SITES_TABLE.';';
+      $sites_result = pwg_query($sites_query);
       $configItems['sites'] = array();
-      $configItems['sites'] = pwg_db_fetch_assoc($result);
+      $configItems['sites'] = pwg_db_fetch_assoc($sites_result);
       
       return array(
           'configItems' => $configItems);
