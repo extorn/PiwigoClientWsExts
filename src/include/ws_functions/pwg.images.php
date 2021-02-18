@@ -250,14 +250,6 @@ SELECT id, date, author, content
               if (is_file($format_file_path))
               {
                   $format_file_size = floor(filesize($format_file_path) / 1024);
-                  // build the uri using the first acceptable category
-                  //$format_file_uri=$image_row['id'].','.$format_file_path.','.$related_categories[0]['id'];
-                  //$url_params['category'] = $related_categories[0];
-                  //$url_params['image_id'] = $image_row['id'];
-                  //$url_params['image_file'] = $image_row['file'];
-                  //$url_params['format'] = $format_ext;
-                  //$format_file_uri = make_picture_url($url_params);
-                  //             $format_file_uri = make_picture_url($image_row['id'], $format_file_path, $related_categories[0]['id']);
                   $url_params['path']=$image_row['id'].'/'.$format_file_path;
                   $format_file_uri = get_element_url($url_params);
                   $formats[] = array(
