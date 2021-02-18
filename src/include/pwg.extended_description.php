@@ -22,7 +22,8 @@
 // +-----------------------------------------------------------------------+
 // | Added missing support for extended descriptions                       |
 // +-----------------------------------------------------------------------+
-function get_extended_desc_cliext($param1, $params)
+// we default params to allow calling with just a single parameter.
+function get_extended_desc_cliext($param1, $params='')
 {
     if (is_array($params)) {
         // This has been called by our code (It's a string if it hasn't)
