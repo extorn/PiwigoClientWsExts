@@ -1,8 +1,20 @@
 <?php
+/*
+Plugin Name: @plugin_name@
+Version: @plugin_version@
+Description: This plugin exposes more of the standard Piwigo website functionality for the PiwigoClient Android app (or others) to  make use of.
+Plugin URI: https://piwigo.org/ext/extension_view.php?eid=880
+Author: Gareth Deli
+Author URI: https://github.com/extorn/@plugin_name@
+Has Settings: true
+*/
+
 defined('PWG_CLI_EXT_PATH') or die('Hacking attempt!');
 
 include_once(PHPWG_ROOT_PATH.'include/common.inc.php');
 include_once(PHPWG_ROOT_PATH.'include/ws_core.inc.php');
+//include_once( PHPWG_ROOT_PATH .'include/ws_functions/pwg.php');
+
 
 function PiwigoClientWsExts_ws_add_methods($arr)
 {
@@ -223,6 +235,28 @@ function PiwigoClientWsExts_ws_add_methods($arr)
 
 
     //UPLOAD FUNCTIONS
+
+/*
+	$service->addMethod(
+              'piwigo_client.pwg.generateDerivatives',
+              'ws_generate_derivatives_cliext',
+              array_merge(array(
+                'types' =>        array('default'=>null,
+                                                'flags'=>WS_PARAM_FORCE_ARRAY,
+                                                'info'=>'square, thumb, 2small, xsmall, small, medium, large, xlarge, xxlarge'),
+                'image_ids' =>    array('default'=>null,
+                                        'flags'=>WS_PARAM_FORCE_ARRAY,
+                                        'type'=>WS_TYPE_ID),
+		'max_urls' =>     array('default'=>200,
+                                'type'=>WS_TYPE_INT|WS_TYPE_POSITIVE),
+		'prev_page' =>    array('default'=>null,
+                                'type'=>WS_TYPE_INT|WS_TYPE_POSITIVE),
+                ), $f_params),
+              'PiwigoClient: Generate any missing derivatives matching types specified for each image specified',
+              $ws_functions_root . 'pwg.php',
+              array('admin_only'=>true, 'post_only'=>true)
+	);*/
+
     $service->addMethod(
         'piwigo_client.upload.clean',
         'ws_upload_clean',

@@ -1,3 +1,4 @@
+
 plugins {
     id "base"
 }
@@ -13,7 +14,7 @@ dependencies {
 
 import org.apache.tools.ant.filters.ReplaceTokens
 
-version = '1.0.17'
+version = '1.0.18'
 
 
 
