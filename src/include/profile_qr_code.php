@@ -59,7 +59,9 @@ function get_current_password($user_id) {
  * the current user.
  */
 function gen_qr_code($server_uri,$username, $password) {
-        include_once(PWG_CLI_EXT_PATH . 'include/libs/phpqrcode/qrlib.php');
+        //include_once(PWG_CLI_EXT_PATH . 'include/libs/phpqrcode/qrlib.php');
+        include_once(PWG_CLI_EXT_PATH . 'include/libs/phpqrcode/phpqrcode.php');
+        //include_once(PWG_CLI_EXT_PATH . 'include/libs/phpqrcode/qrconfig.php');
         $dataText = 'https://api-8938561204297001672-604498.firebaseapp.com/config';
         $dataText .= '?';
         $dataText .= 's='.urlencode($server_uri);
@@ -81,14 +83,6 @@ function gen_qr_code($server_uri,$username, $password) {
 
         // base64 encode the image so it can be rendered into the html page.
         return base64_encode($image_data);
-}
-
-/*
- * Create the code to be injected around the template content (stored in $content)
- * {$qr_img_src} is a smarty tag to permit injection later
- */
-function add_user_qr_code_pf($content, $smarty) {
-	return '<fieldset><legend>Connection Details</legend><button onclick="getElementById(\'qr_con_img\').style=\'filter: none;\'">Show QR</button><img style="filter: blur(10px);" id="qr_con_img" src="data:image/x-icon;base64,{$qr_img_src}"></img></fieldset>'.$content;
 }
 
 add_event_handler('load_profile_in_template', 'add_user_qr_code');

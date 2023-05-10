@@ -14,7 +14,7 @@ dependencies {
 
 import org.apache.tools.ant.filters.ReplaceTokens
 
-version = '1.0.18'
+version = '1.0.19'
 
 
 
