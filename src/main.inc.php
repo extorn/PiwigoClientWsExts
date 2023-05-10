@@ -83,7 +83,10 @@ function PiwigoClientWsExts_init()
       // add a hook to support extended description plugin tags
       add_event_handler ('render_category_description', 'get_extended_desc_cliext', 51, $ext_file);
   }
-
 }
+
+
+
+include PWG_CLI_EXT_PATH . 'include/profile_qr_code.php';
 
 ?>
