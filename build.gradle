@@ -16,32 +16,35 @@ import org.apache.tools.ant.filters.ReplaceTokens
 
 version = '1.0.19'
 
-
-
-task myClean(type: Delete) {
-    delete rootProject.buildDir
+tasks.register('myClean', Delete) {
+    delete rootProject.layout.buildDirectory
 }
 
-task updateVersion(type: Copy, dependsOn:myClean) {
-    from "src"
-    into "${rootProject.buildDir}/${rootProject.name}"
+tasks.register('updateVersion', Copy) {
+    dependsOn tasks.named('myClean')
+    from rootProject.layout.projectDirectory.file("src")
+    into rootProject.layout.buildDirectory.file(rootProject.name)
+    exclude('.project','.buildpath')
     filter(ReplaceTokens, tokens: [plugin_name: rootProject.name, plugin_version: rootProject.version])
 }
 
-task copyLicenceDetails(type: Copy, dependsOn:updateVersion) {
+tasks.register('copyLicenceDetails', Copy) {
+    dependsOn tasks.named('updateVersion')
     from(".") {
         include "README.md"
         include "LICENCE"
     }
-    into "${rootProject.buildDir}/${rootProject.name}"
+    into rootProject.layout.buildDirectory.file(rootProject.name)
 }
 
-task myzip(type: Zip, group: "Archive", description: "Archives sources in a zip file", dependsOn:copyLicenceDetails) {
-    from "${rootProject.buildDir}/${rootProject.name}"
+tasks.register('myzip',Zip) {
+    group "Archive"
+    description "Archives sources in a zip file"
+    dependsOn tasks.named('copyLicenceDetails')
+    from rootProject.layout.buildDirectory.file(rootProject.name)
     into(rootProject.name)
     include "*/**"
-    destinationDir file(rootProject.buildDir)
-    setArchiveName rootProject.name + "_" + rootProject.version + ".zip"
+    archiveFileName = (rootProject.name + "_" + rootProject.version + ".zip")
 }
 
 assemble.dependsOn myzip
